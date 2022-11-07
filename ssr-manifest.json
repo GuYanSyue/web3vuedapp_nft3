@@ -479,41 +479,41 @@
   "index.html": [
     "/web3vuedapp_nft3/assets/Guoergun.00841041.jpeg"
   ],
-  "assets/app.f3e14e49.js-unocss-hash.css": [
+  "assets/app.e08ce6a6.js-unocss-hash.css": [
     "/web3vuedapp_nft3/assets/Guoergun.00841041.jpeg"
   ],
   "../../../../@vite-plugin-pwa/virtual:pwa-register": [
-    "/web3vuedapp_nft3/assets/virtual_pwa-register.041e0768.js"
+    "/web3vuedapp_nft3/assets/virtual_pwa-register.4dfdc326.js"
   ],
   "src/layouts/404.vue?vue&type=script&setup=true&lang.ts": [
-    "/web3vuedapp_nft3/assets/404.dc7e1b06.js"
+    "/web3vuedapp_nft3/assets/404.98838bc9.js"
   ],
   "src/layouts/404.vue": [
-    "/web3vuedapp_nft3/assets/404.dc7e1b06.js"
+    "/web3vuedapp_nft3/assets/404.98838bc9.js"
   ],
   "src/layouts/home.vue": [
-    "/web3vuedapp_nft3/assets/home.f9782025.js"
+    "/web3vuedapp_nft3/assets/home.6d17bffa.js"
   ],
   "src/pages/README.md": [
-    "/web3vuedapp_nft3/assets/README.62dfb7ec.js"
+    "/web3vuedapp_nft3/assets/README.ccaef183.js"
   ],
   "src/pages/about.md": [
-    "/web3vuedapp_nft3/assets/about.42385dd0.js"
+    "/web3vuedapp_nft3/assets/about.a0b53926.js"
   ],
   "src/pages/[...all].vue?vue&type=script&setup=true&lang.ts": [
-    "/web3vuedapp_nft3/assets/_...all_.b07d3dcd.js"
+    "/web3vuedapp_nft3/assets/_...all_.097dd1b7.js"
   ],
   "src/pages/[...all].vue": [
-    "/web3vuedapp_nft3/assets/_...all_.b07d3dcd.js"
+    "/web3vuedapp_nft3/assets/_...all_.097dd1b7.js"
   ],
   "src/store/user.ts": [
-    "/web3vuedapp_nft3/assets/_name_.f7718bdc.js"
+    "/web3vuedapp_nft3/assets/_name_.c18293d8.js"
   ],
   "src/pages/hi/[name].vue?vue&type=script&setup=true&lang.ts": [
-    "/web3vuedapp_nft3/assets/_name_.f7718bdc.js"
+    "/web3vuedapp_nft3/assets/_name_.c18293d8.js"
   ],
   "src/pages/hi/[name].vue": [
-    "/web3vuedapp_nft3/assets/_name_.f7718bdc.js"
+    "/web3vuedapp_nft3/assets/_name_.c18293d8.js"
   ],
   "node_modules/workbox-window/build/workbox-window.prod.es5.mjs": [
     "/web3vuedapp_nft3/assets/workbox-window.prod.es5.d2780aeb.js"
