@@ -36,7 +36,7 @@ const maxSupply = ref(null as any)
       Connect Wallet
     </button>
 
-    <div v-if="account" class="border shadow w-4/12 p-10 mt-10">
+    <div v-if="account" class="outsidebox">
       <img src="../assets/Guoergun.jpeg" class="img-mid border shadow p-1">
 
       <div class="box">
@@ -44,9 +44,9 @@ const maxSupply = ref(null as any)
           <br>鍋兒滾 NFT<br>
         </p>
         <p>剩餘數量: </p>
-        <p>價格: </p>
+        <p>價格: 0.000001 ether</p>
 
-        <p class="MsoNormal"><br>你想鑄造多少個？（最多：3）&emsp;<br></p>
+        <p class="MsoNormal"><br>請輸入購買數量（最多3個）&emsp;<br></p>
         <input
           v-model.number="amountInput"
           type="number"
@@ -56,12 +56,12 @@ const maxSupply = ref(null as any)
           maxlength="2"
         >
         <button style="border-radius: 25px;" class="w-1/1 bg-emerald-500 rounded p-4 mt-10" @click="mint(amountInput)">
-          Mint
+          購買
         </button>
       </div>
     </div>
 
-    <div v-if="account && crypto_.Onlyowner === account" class="border shadow w-4/12 p-4 mt-10">
+    <div v-if="account && crypto_.Onlyowner === account" class="outsidebox">
       <p style="font-size: 1.5rem;">Hello, owner !</p>
 
       <div class="box">
