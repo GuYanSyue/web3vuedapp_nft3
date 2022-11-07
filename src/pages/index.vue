@@ -24,10 +24,10 @@ const maxSupply = ref(null as any)
       Get NFT !
     </h1>
     <div v-if="!account">
-      <P class="MsoNormal">
+      <P class="MsoNormal2">
         ～。鍋兒滾 NFT。～
       </P>
-      <P class="MsoNormal">
+      <P class="MsoNormal2">
         點擊下方橙色按鈕連結錢包購買NFT
       </P><br>
       <p>Only for Metamask --Goerli network.</p>

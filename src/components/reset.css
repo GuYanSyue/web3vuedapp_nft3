@@ -25,6 +25,13 @@
     /*float: left;*/
     white-space: pre-wrap;
 }
+.MsoNormal2{
+    font-family: DFkai-sb, sans-serif;
+    font-size: 16px;
+    /*color: darkblue;*/
+    /*float: left;*/
+    white-space: pre-wrap;
+}
 .box {
     text-align: left;
     margin: 10px;
