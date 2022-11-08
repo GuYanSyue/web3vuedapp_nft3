@@ -5,7 +5,7 @@ import { acceptHMRUpdate, defineStore } from 'pinia'
 
 // import { ref } from 'vue'
 import contractABI from '../artifacts/contracts/ShopNFT.sol/ShopNFT.json'
-const contractAddress = '0xC7e8DEDdb975849f4756d78cC5293380966ba95F'
+const contractAddress = '0xF916D8fd6f6B3e38869b61e631d975e9bC0bA2Ff'
 const Onlyowner = '0xc98e9c69119eb0b764b0d5dcbc1532de8bfc2d4f'
 
 // const Sig: number | ethers.utils.BytesLike | ethers.utils.Hexable = []
@@ -26,6 +26,9 @@ export const useCryptoStore = defineStore('user', () => {
   const showPaused = ref(null)
   const showTokenIds = ref(null)
   const showTokenURI = ref(null)
+  const showSupply = ref(null)
+  const info = ref(0)
+  const showBalance = ref(null)
 
   async function getBalance() {
     setLoader(true)
@@ -38,7 +41,32 @@ export const useCryptoStore = defineStore('user', () => {
 
         const count = (await SimplePayContract.getBalance())
         const amt = ethers.utils.formatEther(count)
+        showBalance.value = amt
         console.log('count', amt)
+        setLoader(false)
+      }
+    }
+    catch (e) {
+      setLoader(false)
+      console.log('e', e)
+    }
+  }
+  async function viewInfo() {
+    setLoader(true)
+    try {
+      const { ethereum } = window
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        const signer = provider.getSigner()
+        const ShopPortalContract = new ethers.Contract(contractAddress, contractABI.abi, signer)
+
+        const Supply = (await ShopPortalContract.supply())
+        showSupply.value = Supply
+        showPaused.value = (await ShopPortalContract.paused())
+        showCost.value = (await ShopPortalContract.cost()) / 1e18
+        info.value = 1
+
+        console.log('Supply', Supply)
         setLoader(false)
       }
     }
@@ -294,7 +322,7 @@ export const useCryptoStore = defineStore('user', () => {
 
         // 呼叫合約函數
         const mintTxn = await ShopPortalContract.setMaxSupplyt(maxSupply)
-        showMaxSupply.value = (await ShopPortalContract.setMaxSupply())
+        showMaxSupply.value = await ShopPortalContract.maxSupply()
 
         console.log('Setting....', mintTxn.hash)
         await mintTxn.wait()
@@ -355,6 +383,11 @@ export const useCryptoStore = defineStore('user', () => {
     showPaused,
     showTokenIds,
     showTokenURI,
+    showSupply,
+    info,
+    showBalance,
+    getBalance,
+    viewInfo,
     mint,
     withdraw,
     walletOfOwner,

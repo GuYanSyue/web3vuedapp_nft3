@@ -17,6 +17,7 @@ contract ShopNFT is ERC721Enumerable, Ownable{
     uint256 public cost = 0.000001 ether; // Mint 價格
     uint256 public maxSupply = 20; // 只有 個 NFT
     uint256 public maxMintAmount = 3; // 一次最多只能 Mint 一個
+    uint256 public supply = 20;
     
     constructor() ERC721("ShopNftT3", "SNT3") payable{    
 	}
@@ -38,6 +39,7 @@ contract ShopNFT is ERC721Enumerable, Ownable{
             if (mintIndex <= maxSupply) {
                 _safeMint(msg.sender, mintIndex);  
                 _tokenIdCounter.increment();
+                supply -= 1;
             } 
         }
     }
@@ -85,6 +87,7 @@ contract ShopNFT is ERC721Enumerable, Ownable{
     // 重新設定總提供量
     function setMaxSupply(uint256 _newMaxSupply) public onlyOwner() {
         maxSupply = _newMaxSupply;
+        supply = _newMaxSupply;
     }
     
     // 重新設定一次能 Mint 的數量
