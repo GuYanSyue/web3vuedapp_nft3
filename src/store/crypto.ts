@@ -5,7 +5,7 @@ import { acceptHMRUpdate, defineStore } from 'pinia'
 
 // import { ref } from 'vue'
 import contractABI from '../artifacts/contracts/ShopNFT.sol/ShopNFT.json'
-const contractAddress = '0xF916D8fd6f6B3e38869b61e631d975e9bC0bA2Ff'
+const contractAddress = '0x22579eE9F78ef9Ed8cAe46f068370c106b4192b9'
 const Onlyowner = '0xc98e9c69119eb0b764b0d5dcbc1532de8bfc2d4f'
 
 // const Sig: number | ethers.utils.BytesLike | ethers.utils.Hexable = []
@@ -24,11 +24,13 @@ export const useCryptoStore = defineStore('user', () => {
   const showMaxMintAmount = ref(null)
   const showMaxSupply = ref(null)
   const showPaused = ref(null)
-  const showTokenIds = ref(null)
+  const showTokenIds = ref([] as any)
   const showTokenURI = ref(null)
   const showSupply = ref(null)
   const info = ref(0)
   const showBalance = ref(null)
+  const Account = ref('123')
+  const sum = ref(0)
 
   async function getBalance() {
     setLoader(true)
@@ -88,13 +90,17 @@ export const useCryptoStore = defineStore('user', () => {
         const signer = provider.getSigner() // 持有使用者的私鑰並以此簽核 (Signer)
         const ShopPortalContract = new ethers.Contract(contractAddress, contractABI.abi, signer)
 
+        const send_token_amount = amountInput * 1 / 1e6 // 數量 * 0.000001
+
         const overrides = {
-          value: ethers.utils.parseEther('.000001'),
-          gasLimit: 200000,
+          value: ethers.utils.parseUnits(send_token_amount.toString(), 18),
+          gasLimit: 3000000,
         }
 
         // 呼叫合約函數
         const mintTxn = await ShopPortalContract.mint(amountInput, overrides)
+        const Supply = (await ShopPortalContract.supply())
+        showSupply.value = Supply
 
         console.log('Mining....', mintTxn.hash)
         await mintTxn.wait()
@@ -137,7 +143,7 @@ export const useCryptoStore = defineStore('user', () => {
     }
   }
 
-  async function walletOfOwner() {
+  async function walletOfOwner(A: any) {
     console.log('setting loader')
     setLoader(true)
     try {
@@ -147,9 +153,14 @@ export const useCryptoStore = defineStore('user', () => {
         const signer = provider.getSigner() // 持有使用者的私鑰並以此簽核 (Signer)
         const ShopPortalContract = new ethers.Contract(contractAddress, contractABI.abi, signer)
 
+        // const newAccount = utils.getAddress(Account.value)
+
         // 呼叫合約函數
-        const mintTxn = await ShopPortalContract.walletOfOwner(account)
-        showTokenIds.value = mintTxn
+        const mintTxn = await ShopPortalContract.walletOfOwner(A)
+        showTokenIds.value = mintTxn.toString()
+
+        sum.value = mintTxn.length
+        showMaxMintAmount.value = await ShopPortalContract.maxMintAmount()
 
         console.log('Setting....', mintTxn.hash)
         await mintTxn.wait()
@@ -321,7 +332,7 @@ export const useCryptoStore = defineStore('user', () => {
         const ShopPortalContract = new ethers.Contract(contractAddress, contractABI.abi, signer)
 
         // 呼叫合約函數
-        const mintTxn = await ShopPortalContract.setMaxSupplyt(maxSupply)
+        const mintTxn = await ShopPortalContract.setMaxSupply(maxSupply)
         showMaxSupply.value = await ShopPortalContract.maxSupply()
 
         console.log('Setting....', mintTxn.hash)
@@ -353,8 +364,10 @@ export const useCryptoStore = defineStore('user', () => {
 
       console.log('Connected: ', myAccounts[0])
       account.value = myAccounts[0]
+      Account.value = myAccounts[0]
 
       await getBalance()
+      await walletOfOwner(myAccounts[0])
     }
     catch (error) {
       console.log(error)
@@ -373,6 +386,7 @@ export const useCryptoStore = defineStore('user', () => {
     loading,
     connectWallet,
     account,
+    Account,
     Amount,
     Sig,
     Onlyowner,
@@ -386,6 +400,7 @@ export const useCryptoStore = defineStore('user', () => {
     showSupply,
     info,
     showBalance,
+    sum,
     getBalance,
     viewInfo,
     mint,
